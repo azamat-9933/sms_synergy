@@ -53,36 +53,27 @@ class General(models.Model):
         ordering = ['-created_at']
 
 
-class PostNews(models.Model):
-    class PostOrNewsChoices(models.TextChoices):
-        POST = 'post', 'Post'
-        NEWS = 'news', 'News'
-
+class Post(models.Model):
     title = models.CharField(max_length=255)
     short_desc = models.CharField(max_length=255)
     content = CKEditor5Field('Content')
     photo = models.ImageField(upload_to='posts_news')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    is_published = models.BooleanField(default=False)
+    is_published = models.BooleanField(default=True)
 
-    post_or_news = models.CharField(max_length=255, choices=PostOrNewsChoices.choices)
 
     class Meta:
-        verbose_name = 'Post/News'
-        verbose_name_plural = 'Post/News'
+        verbose_name = 'Post'
+        verbose_name_plural = 'Post'
         ordering = ['-created_at']
 
 
-class PartnerFund(models.Model):
-    class PartnerOrFundChoices(models.TextChoices):
-        PARTNER = 'partner', 'Partner'
-        FUNDS = 'funds', 'Funds'
+class Partner(models.Model):
 
     logo_photo = models.ImageField(upload_to='partners_funds/')
     title = models.CharField(max_length=255)
     description = models.TextField()
-    fund_or_partner = models.CharField(max_length=255, choices=PartnerOrFundChoices.choices)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -122,6 +113,7 @@ class Application(models.Model):
     email = models.EmailField(max_length=255)
     phone = models.CharField(max_length=255)
     message = models.TextField()
+    document = models.FileField(upload_to="applications/documents/")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -186,5 +178,18 @@ class SMSCampaign(models.Model):
             recipient_list=[email]
         )
 
+class News(models.Model):
+    title = models.CharField(max_length=255)
+    short_desc = models.CharField(max_length=255)
+    content = CKEditor5Field('Content')
+    photo = models.ImageField(upload_to='posts_news')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField(default=True)
 
+
+    class Meta:
+        verbose_name = 'News'
+        verbose_name_plural = 'News'
+        ordering = ['-created_at']
 

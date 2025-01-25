@@ -26,6 +26,7 @@ urlpatterns = [
 
     # apps API url
     path('api/sms_synergy_inc/', include('consulting.urls')),
+    path('api/common_data/', include('common.urls')),
     # Redirect to the admin login page if no URL matches
     path('', lambda request: redirect('admin/', permanent=True)),
 

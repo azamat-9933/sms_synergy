@@ -23,18 +23,18 @@ class GeneralAdmin(admin.ModelAdmin):
     search_fields = ('email', 'phone')
     ordering = ('-created_at',)
 
-@admin.register(PostNews)
-class PostNewsAdmin(admin.ModelAdmin):
-    list_display = ('title', 'post_or_news', 'is_published', 'created_at', 'updated_at')
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_published', 'created_at', 'updated_at')
     search_fields = ('title', 'short_desc')
-    list_filter = ('post_or_news', 'is_published', 'created_at')
+    list_filter = ('is_published', 'created_at')
     ordering = ('-created_at',)
 
-@admin.register(PartnerFund)
-class PartnerFundAdmin(admin.ModelAdmin):
-    list_display = ('title', 'fund_or_partner', 'created_at')
+@admin.register(Partner)
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = ('title', 'created_at')
     search_fields = ('title',)
-    list_filter = ('fund_or_partner', 'created_at')
+    list_filter = ('created_at',)
     ordering = ('-created_at',)
 
 @admin.register(Service)
@@ -71,5 +71,14 @@ class TeamMemberAdmin(admin.ModelAdmin):
 
 class SMSCampaignAdmin(admin.ModelAdmin):
     list_display = ['subject', 'message', 'sent_at']
+
+
+@admin.register(News)
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_published', 'created_at', 'updated_at')
+    search_fields = ('title', 'short_desc')
+    list_filter = ('is_published', 'created_at')
+    ordering = ('-created_at',)
+
 
 admin.site.register(SMSCampaign, SMSCampaignAdmin)
