@@ -4,9 +4,6 @@ from django.conf import settings
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
 
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-
 # Create your models here.
 
 class FAQ(models.Model):
