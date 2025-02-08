@@ -1,11 +1,22 @@
+import uuid
+
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
+
+from common.fields import WEBPField
+
+def image_folder(instance, filename):
+    return 'photos/{}.webp'.format(uuid.uuid4().hex)
 
 
 class MainPageFirstBanner(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
     number = models.IntegerField()
     name = models.CharField(max_length=255)
 
@@ -34,7 +45,11 @@ class MainPageOurServicesSection(models.Model):
 
 class MainPageSecondBanner(models.Model):
     title = models.CharField(max_length=255)
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'Main Page Second Banner'
@@ -61,7 +76,11 @@ class MainPageOurMissionSection(models.Model):
 
 class MainPageThirdBanner(models.Model):
     title = models.CharField(max_length=255)
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'Main Page Third Banner'
@@ -84,7 +103,11 @@ class MainPageStatisticsSection(models.Model):
     fourth_number = models.IntegerField()
     fourth_title = models.CharField(max_length=255)
 
-    right_image = models.ImageField(upload_to="common/images/")
+    right_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'Statistics Section'
@@ -94,7 +117,11 @@ class MainPageStatisticsSection(models.Model):
 class MainPageLastBanner(models.Model):
     title = models.CharField(max_length=255)
     description = CKEditor5Field()
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'Main Page Last Banner'
@@ -103,7 +130,11 @@ class MainPageLastBanner(models.Model):
 
 class AboutPageFirstBanner(models.Model):
     title = models.CharField(max_length=255)
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'About Page First Banner'
@@ -120,7 +151,11 @@ class AboutPageOurStorySection(models.Model):
 
 class AboutPageSecondBanner(models.Model):
     title = models.CharField(max_length=255)
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'About Page Second Banner'
@@ -138,7 +173,11 @@ class AboutPageOurTeamSection(models.Model):
 
 class AboutUsPageLastBanner(models.Model):
     title = models.CharField(max_length=255)
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
     description = CKEditor5Field()
 
     class Meta:
@@ -148,7 +187,11 @@ class AboutUsPageLastBanner(models.Model):
 
 class ServicesPageFirstBanner(models.Model):
     title = models.CharField(max_length=255)
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'Services Page First Banner'
@@ -157,7 +200,11 @@ class ServicesPageFirstBanner(models.Model):
 
 class OurServicesSecondBanner(models.Model):
     title = models.CharField(max_length=255)
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'Our Services Second Banner'
@@ -166,7 +213,11 @@ class OurServicesSecondBanner(models.Model):
 
 class OurProjectsPageFirstBanner(models.Model):
     title = models.CharField(max_length=255)
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'Our Projects Page First Banner'
@@ -175,7 +226,11 @@ class OurProjectsPageFirstBanner(models.Model):
 
 class OurTeamPageFirstBanner(models.Model):
     title = models.CharField(max_length=255)
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'Our Team Page First Banner'
@@ -192,7 +247,11 @@ class OurTeamPageOurTeamSection(models.Model):
 
 class OurTeamPageSecondBanner(models.Model):
     title = models.CharField(max_length=255)
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'Our Team Page Second Banner'
@@ -201,7 +260,11 @@ class OurTeamPageSecondBanner(models.Model):
 
 class BlogPageFistBanner(models.Model):
     title = models.CharField(max_length=255)
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'Blog Page First Banner'
@@ -210,15 +273,24 @@ class BlogPageFistBanner(models.Model):
 
 class BlogPageSecondBanner(models.Model):
     title = models.CharField(max_length=255)
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'Blog Page Second Banner'
         verbose_name_plural = 'Blog Page Second Banners'
 
+
 class PostPageFirstBanner(models.Model):
     title = models.CharField(max_length=255)
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'Post Page First Banner'
@@ -227,7 +299,11 @@ class PostPageFirstBanner(models.Model):
 
 class PostPageSecondBanner(models.Model):
     title = models.CharField(max_length=255)
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'Post Page Second Banner'
@@ -235,7 +311,11 @@ class PostPageSecondBanner(models.Model):
 
 
 class ContactPageFirstBanner(models.Model):
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'Contact Page First Banner'
@@ -244,9 +324,12 @@ class ContactPageFirstBanner(models.Model):
 
 class ContactPageSecondBanner(models.Model):
     title = models.CharField(max_length=255)
-    back_image = models.ImageField(upload_to="common/images/")
+    back_image = WEBPField(
+        upload_to=image_folder,
+        height_field='height',
+        width_field='width'
+    )
 
     class Meta:
         verbose_name = 'Contact Page Second Banner'
         verbose_name_plural = 'Contact Page Second Banners'
-

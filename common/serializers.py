@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 from rest_framework import serializers
 from .models import *
 
@@ -29,10 +30,26 @@ class MainPageAboutUsSectionSerializer(serializers.ModelSerializer):
 
 
 class MainPageOurServicesSectionSerializer(serializers.ModelSerializer):
+    description = serializers.SerializerMethodField()
+
     class Meta:
         model = MainPageOurServicesSection
         fields = ['id', 'title', 'description']
         read_only_fields = fields
+
+    def get_description(self, obj):
+        content = obj.description  # Исправлено на obj.description
+        # Парсим контент с помощью BeautifulSoup
+        soup = BeautifulSoup(content, "html.parser")
+
+        # Ищем все теги <img> и обновляем их src
+        for img_tag in soup.find_all("img"):
+            if img_tag.get("src"):
+                # Преобразуем относительные пути в абсолютные URL
+                img_tag["src"] = self.context["request"].build_absolute_uri(img_tag["src"])
+
+        # Возвращаем обновленный HTML-контент
+        return str(soup)
 
 
 class MainPageSecondBannerSerializer(serializers.ModelSerializer):
@@ -45,10 +62,26 @@ class MainPageSecondBannerSerializer(serializers.ModelSerializer):
 
 
 class MainPageOurPartnersSectionSerializer(serializers.ModelSerializer):
+    description = serializers.SerializerMethodField()
+
     class Meta:
         model = MainPageOurPartnersSection
         fields = ['id', 'title', 'description']
         read_only_fields = fields
+
+    def get_description(self, obj):
+        content = obj.description  # Исправлено на obj.description
+        # Парсим контент с помощью BeautifulSoup
+        soup = BeautifulSoup(content, "html.parser")
+
+        # Ищем все теги <img> и обновляем их src
+        for img_tag in soup.find_all("img"):
+            if img_tag.get("src"):
+                # Преобразуем относительные пути в абсолютные URL
+                img_tag["src"] = self.context["request"].build_absolute_uri(img_tag["src"])
+
+        # Возвращаем обновленный HTML-контент
+        return str(soup)
 
 
 class MainPageOurMissionSectionSerializer(serializers.ModelSerializer):
